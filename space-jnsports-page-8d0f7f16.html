@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>江南体育 · 运动空间指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f2f4f6;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a3a;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+    /* 卡片通用设计 — 浅灰背景、细边框、柔和阴影 */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e6e9ed;
+      border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2.2rem;
+      transition: box-shadow 0.15s ease;
+    }
+    @media (max-width: 600px) {
+      body { padding: 1.2rem 0.8rem; }
+      .card { padding: 1.5rem 1.2rem; border-radius: 20px; }
+    }
+    /* hero 区域特殊处理 */
+    .hero {
+      text-align: center;
+      background: linear-gradient(145deg, #ffffff 0%, #f9fafc 100%);
+      border: 1px solid #e0e5ea;
+      padding: 3.2rem 2rem 2.8rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
+      color: #0b1a2b;
+    }
+    .hero .subhead {
+      font-size: 1.2rem;
+      color: #3d4e62;
+      max-width: 600px;
+      margin: 0 auto 0.8rem;
+    }
+    .hero .lead {
+      font-size: 1rem;
+      color: #546e7a;
+      max-width: 680px;
+      margin: 0 auto 1.6rem;
+    }
+    .hero .meta-note {
+      font-size: 0.9rem;
+      color: #7a8b9c;
+      border-top: 1px solid #eaedf0;
+      padding-top: 1.4rem;
+      margin-top: 0.6rem;
+    }
+    /* 标题与文本辅助 */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 550;
+      margin-bottom: 1rem;
+      color: #152b3c;
+      letter-spacing: -0.3px;
+    }
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin: 1.2rem 0 0.4rem;
+      color: #1e3a4a;
+    }
+    p {
+      margin-bottom: 0.9rem;
+    }
+    .small-meta {
+      font-size: 0.9rem;
+      color: #657b8b;
+    }
+    /* 优势区：三列卡片 */
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      margin-top: 0.6rem;
+    }
+    .advantage-item {
+      background: #ffffff;
+      border: 1px solid #e5e9ee;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .advantage-item h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      font-weight: 550;
+      color: #153342;
+    }
+    .advantage-item p {
+      font-size: 0.95rem;
+      color: #3f5668;
+    }
+    @media (max-width: 760px) {
+      .advantage-grid { grid-template-columns: 1fr; }
+    }
+    /* 说明区双栏 */
+    .info-two-col {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 0.6rem 0;
+    }
+    .info-two-col > div {
+      flex: 1 1 260px;
+    }
+    .info-two-col ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .info-two-col li {
+      padding: 0.3rem 0 0.3rem 1.4rem;
+      position: relative;
+    }
+    .info-two-col li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #3f7a94;
+      font-weight: 500;
+    }
+    /* faq 摘要 */
+    .faq-item {
+      border-bottom: 1px solid #eef1f5;
+      padding: 1rem 0;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 550;
+      color: #1b3c4d;
+      margin-bottom: 0.2rem;
+    }
+    .faq-a {
+      color: #3f5a6b;
+      font-size: 0.96rem;
+    }
+    /* 底部链接区 */
+    .foot-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 0 0.4rem;
+      border-top: 1px solid #dfe4e9;
+      margin-top: 0.2rem;
+    }
+    .foot-links .copy {
+      font-size: 0.9rem;
+      color: #6f8597;
+    }
+    .foot-links a {
+      color: #1d5b79;
+      text-decoration: none;
+      font-weight: 450;
+      border-bottom: 1px solid transparent;
+    }
+    .foot-links a:hover {
+      border-bottom-color: #1d5b79;
+    }
+    .inline-link {
+      color: #1d6b8a;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b8cddb;
+    }
+    .inline-link:hover {
+      color: #003f5c;
+      text-decoration-color: #003f5c;
+    }
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #b8c8d6;
+      border-radius: 40px;
+      padding: 0.5rem 1.6rem;
+      font-size: 0.9rem;
+      color: #1e445a;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-ghost:hover {
+      background: #e5edf3;
+      border-color: #7f9bb0;
+    }
+    .tag {
+      display: inline-block;
+      background: #eef3f7;
+      color: #1d4c63;
+      padding: 0.15rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      border: 1px solid #d6e0e9;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HERO 区 -->
+  <section class="card hero">
+    <h1>江南体育 · 运动空间识别站</h1>
+    <p class="subhead">快速了解 <span class="tag">江南体育</span> 是什么、提供什么、适合谁</p>
+    <p class="lead">
+      无论你是偶然发现这个站点，还是被朋友推荐过来，这里整合了关于运动场馆、日常训练和休闲活动的基础信息。页面内容侧重「这个网站是做什么的」，帮你节省摸索时间。
+    </p>
+    <div class="meta-note">
+      <span>🔍 站点属性：运动主题信息聚合 · 面向普通用户与轻度运动爱好者</span>
+    </div>
+  </section>
+
+  <!-- 优势区：快速识别价值 -->
+  <section class="card">
+    <h2>为什么可以关注这里</h2>
+    <div class="advantage-grid">
+      <div class="advantage-item">
+        <h3>📌 用途清晰</h3>
+        <p>不需要反复猜测。首页直接展示内容分类、常见问题和服务范围，你一眼就能判断是否对你有帮助。</p>
+      </div>
+      <div class="advantage-item">
+        <h3>🧭 场景覆盖</h3>
+        <p>从个人锻炼、团体约球到轻量赛事信息，覆盖多种常见的运动场景，省去自己搜集零散信息的麻烦。</p>
+      </div>
+      <div class="advantage-item">
+        <h3>📄 条目整洁</h3>
+        <p>文字为主，结构分明，没有过度营销或繁杂弹窗。每段内容都经过整理，方便快速浏览或精读。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 说明区：网站内容与典型用途 -->
+  <section class="card">
+    <h2>网站内容说明</h2>
+    <div class="info-two-col">
+      <div>
+        <h3>📋 常见信息模块</h3>
+        <ul>
+          <li>运动场地介绍与合作场馆</li>
+          <li>基础运动知识、准备建议</li>
+          <li>活动、赛事或社群动态摘要</li>
+          <li>用户经验分享与 FAQ 整理</li>
+        </ul>
+        <p class="small-meta" style="margin-top: 0.8rem;">* 内容保持更新，但以实用信息为主，不承诺即时性。</p>
+      </div>
+      <div>
+        <h3>🧑‍🤝‍🧑 适合哪些人</h3>
+        <ul>
+          <li>想快速了解运动场馆选择的初学者</li>
+          <li>寻找线下活动或组队渠道的爱好者</li>
+          <li>希望获得运动准备清单（装备、安全）的人</li>
+          <li>单纯浏览、获取灵感的普通访客</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top: 0.6rem;">
+      如果你希望进一步探索具体主题，可以直接访问 
+      <a href="https://space-jnsports.com" class="inline-link">江南体育</a> 
+      的主站页面，那里有更详细的分类和资源索引。
+    </p>
+  </section>
+
+  <!-- FAQ 摘要区 （非传统问答，更像常见疑问梳理）-->
+  <section class="card">
+    <h2>常见疑问摘要</h2>
+    <div class="faq-item">
+      <div class="faq-q">❓ 这个网站主要发布什么内容？</div>
+      <div class="faq-a">围绕运动空间展开，包括场馆信息、运动入门建议、小型活动介绍以及用户可能关心的实用细节。不涉及复杂竞技或专业训练计划。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 信息来自哪里，可靠吗？</div>
+      <div class="faq-a">大部分内容经过编辑整理，引用公开资料或经验总结。但建议你在做重要决策（如办卡、参加活动）前，通过官方渠道二次确认。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 如何快速找到我需要的内容？</div>
+      <div class="faq-a">你可以利用站内导航或直接搜索关键词。另外，在 
+        <a href="https://space-jnsports.com" class="inline-link">江南体育</a> 
+        的主站中，内容按类别归档，查找相对直观。
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 是否提供线下服务或教练对接？</div>
+      <div class="faq-a">本站主要做信息展示与指引，不直接提供教练中介或场地预订服务。部分合作场馆信息会列在相关页面中。</div>
+    </div>
+    <p class="small-meta" style="margin-top: 0.4rem;">更多问题可浏览站点内 FAQ 专页，或通过页面底部方式联系。</p>
+  </section>
+
+  <!-- 底部链接区 -->
+  <div class="foot-links">
+    <span class="copy">© 江南体育 · 空间指南</span>
+    <span>
+      <a href="https://space-jnsports.com" class="btn-ghost">江南体育</a>
+    </span>
+    <span class="small-meta">内容仅供参考 · 实际以官网为准</span>
+  </div>
+
+  <!-- 附加说明：风格化分隔 + 细链接 -->
+  <div style="text-align: center; padding: 0.4rem 0 0.2rem; font-size: 0.8rem; color: #8b9dad; border-top: 1px dashed #dce2e9;">
+    本页为介绍落地页 · 核心入口指向 <a href="https://space-jnsports.com" style="color: #4a6e82;">江南体育</a> · 简洁索引
+  </div>
+
+</div>
+</body>
+</html>
